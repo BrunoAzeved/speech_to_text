@@ -1,3 +1,6 @@
+"""
+Inspirado no vídeo: https://www.youtube.com/watch?v=E0_kG5j6lEo
+"""
 import whisper
 from moviepy.video.VideoClip import ImageClip
 from moviepy.editor import *
@@ -40,7 +43,13 @@ flag_to_exit = False
 #     print('stop')
 
 base_path_to_saved_files = "/Users/brunoazevedo/MyProjects/Speak_to_text/temp_audio/"
-list_of_files = os.listdir(base_path_to_saved_files)
+
+# Obtém a lista de arquivos em temp_audio filtrando apenas por arquivos .mp3
+list_of_files = []
+for files in os.listdir(base_path_to_saved_files):
+    if files.endswith(".mp3"):
+        list_of_files.append(files)
+
 start = 0
 end = 0
 id_counter = 0
