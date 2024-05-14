@@ -7,7 +7,7 @@ def converter_segundos_para_tempo(segundos):
     return tempo
 
 # Abrir o arquivo original
-with open('subtitles/subtitles0.txt', 'r') as arquivo_origem:
+with open('subtitles/subtitles2.txt', 'r') as arquivo_origem:
     linhas = arquivo_origem.readlines()
 
 # Extrair o campo 'text' e as marcações de início e fim de cada linha e consolidar em uma lista
@@ -31,6 +31,6 @@ for linha in linhas:
         continue
 
 # Escrever os textos com marcações consolidados em um novo arquivo
-with open('textos_com_marcacoes.txt', 'w') as arquivo_destino:
+with open('transcricao_audio2.txt', 'w') as arquivo_destino:
     for texto_com_marcacoes in textos_com_marcacoes:
         arquivo_destino.write(texto_com_marcacoes + '\n')
