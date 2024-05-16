@@ -21,7 +21,7 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
 
 1. Clone o repositório para o seu ambiente local:
    ``` bash
-   git clone https://github.com/seu-usuario/speech_to_text.git
+   git clone https://github.com/BrunoAzeved/speech_to_text
     ```
 
 2.	Navegue até o diretório do projeto:
