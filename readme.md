@@ -3,15 +3,6 @@
 Este projeto utiliza a engine Whisper da OpenAI e a biblioteca MoviePy para transcrever áudios de arquivos `.mp4` e gerar arquivos de texto amigáveis ao usuário final. O processo inclui dividir os arquivos de áudio, transcrevê-los e formatar as transcrições.
 
 ## Estrutura do Projeto	
-peech_to_text/
-├── input
-│   └── [arquivos .mp4]
-├── output
-│   └── [arquivos gerados]
-├── temp_audio
-│   └── [arquivos temporários gerados]
-├── main.py
-└── README.md
 
 - `input`: Diretório onde você deve colocar os arquivos `.mp4` que serão processados.
 - `output`: Diretório onde os arquivos de transcrição formatados serão salvos.
