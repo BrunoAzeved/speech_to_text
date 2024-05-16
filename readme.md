@@ -42,7 +42,8 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
     python -m venv venv
     ``` 
 4.	Ative o ambiente virtual:
-	•	No Windows:
+	
+    •	No Windows:
     ``` bash
     venv\Scripts\activate
     ```
@@ -87,10 +88,10 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
 	1.	Cria as pastas input, output e temp_audio se não existirem.
 	2.	Verifica se há arquivos .mp4 na pasta input. Se estiver vazia, informa ao usuário e encerra a execução.
 	3.	Para cada arquivo .mp4 na pasta input:
-	•	Divide o áudio em clipes menores.
-	•	Transcreve os clipes usando Whisper.
-	•	Formata a transcrição em um arquivo amigável ao usuário.
-	•	Salva os arquivos gerados na pasta output.
+        - Divide o áudio em clipes menores.
+	    - Transcreve os clipes usando Whisper.
+	    - Formata a transcrição em um arquivo amigável ao usuário.
+	    - Salva os arquivos gerados na pasta output.
 
 ## Contribuição
 
