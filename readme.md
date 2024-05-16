@@ -96,7 +96,7 @@ Sinta-se à vontade para contribuir com o projeto. Você pode fazer isso de vár
 
 ## Licença
 
-Este projeto está licenciado sob a MIT License. Veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a MIT License. Veja o arquivo [LICENSE](https://opensource.org/license/MIT) para mais detalhes.
 
-Autor: Seu Nome
-Contato: seu.email@exemplo.com
+Autor: Bruno Azevedo
+Contato: bruno.azevedo94@gmail.com
