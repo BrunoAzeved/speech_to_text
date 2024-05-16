@@ -29,7 +29,7 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
 ## Instalação
 
 1. Clone o repositório para o seu ambiente local:
-   ```bash
+   ``` bash
    git clone https://github.com/seu-usuario/speech_to_text.git
     ```
 
@@ -64,13 +64,6 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
     ```
 3.	Os arquivos de transcrição serão gerados na pasta output.
 
-## Uso
-
-1.	Coloque os arquivos .mp4 que você deseja processar na pasta input.
-2.	Execute o script principal:
-    ``` bash
-    python main.py
-    ```
 
 ## Estrutura do Código
 
@@ -85,13 +78,13 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
 
 ### Fluxo do Programa
 
-	1.	Cria as pastas input, output e temp_audio se não existirem.
+	1.  Cria as pastas input, output e temp_audio se não existirem.
 	2.	Verifica se há arquivos .mp4 na pasta input. Se estiver vazia, informa ao usuário e encerra a execução.
 	3.	Para cada arquivo .mp4 na pasta input:
-        - Divide o áudio em clipes menores.
-	    - Transcreve os clipes usando Whisper.
-	    - Formata a transcrição em um arquivo amigável ao usuário.
-	    - Salva os arquivos gerados na pasta output.
+        •   Divide o áudio em clipes menores.
+	    •   Transcreve os clipes usando Whisper.
+	    •   Formata a transcrição em um arquivo amigável ao usuário.
+	    •   Salva os arquivos gerados na pasta output.
 
 ## Contribuição
 
