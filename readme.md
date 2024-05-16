@@ -31,20 +31,49 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados:
 1. Clone o repositório para o seu ambiente local:
    ```bash
    git clone https://github.com/seu-usuario/speech_to_text.git
-    3.	Os arquivos de transcrição serão gerados na pasta output.
+    ```
 
 2.	Navegue até o diretório do projeto:
-``` bash
-cd speech_to_text
-```
+    ``` bash
+    cd speech_to_text
+    ```
 3.	Crie um ambiente virtual:
-``` bash
-python -m venv venv
-``` 
+    ``` bash
+    python -m venv venv
+    ``` 
+4.	Ative o ambiente virtual:
+	•	No Windows:
+    ``` bash
+    venv\Scripts\activate
+    ```
+    •	No macOS/Linux:
+    ``` bash
+    source venv/bin/activate
+    ```
+5.	Instale as dependências necessárias:
+    ``` bash
+    pip install -r requirements.txt
+    ```
+## Uso
 
-Estrutura do Código
+1.	Coloque os arquivos .mp4 que você deseja processar na pasta input.
+2.	Execute o script principal:
+    ``` bash
+    python main.py
+    ```
+3.	Os arquivos de transcrição serão gerados na pasta output.
 
-Funções Principais
+## Uso
+
+1.	Coloque os arquivos .mp4 que você deseja processar na pasta input.
+2.	Execute o script principal:
+    ``` bash
+    python main.py
+    ```
+
+## Estrutura do Código
+
+### Funções Principais
 
 	•	converter_segundos_para_tempo(segundos): Converte segundos em uma string no formato hh:mm:ss.
 	•	save_subtitles(list_of_subtitles, path_to_save): Salva a transcrição dos áudios em um único arquivo.
@@ -53,7 +82,7 @@ Funções Principais
 	•	processar_arquivo_origem(caminho_arquivo_origem): Lê o arquivo de origem e retorna uma lista de textos com marcações de tempo.
 	•	escrever_arquivo_destino(textos_com_marcacoes, caminho_arquivo_destino): Escreve os textos com marcações de tempo em um novo arquivo.
 
-Fluxo do Programa
+### Fluxo do Programa
 
 	1.	Cria as pastas input, output e temp_audio se não existirem.
 	2.	Verifica se há arquivos .mp4 na pasta input. Se estiver vazia, informa ao usuário e encerra a execução.
@@ -63,7 +92,7 @@ Fluxo do Programa
 	•	Formata a transcrição em um arquivo amigável ao usuário.
 	•	Salva os arquivos gerados na pasta output.
 
-Contribuição
+## Contribuição
 
 Sinta-se à vontade para contribuir com o projeto. Você pode fazer isso de várias maneiras:
 
@@ -71,7 +100,7 @@ Sinta-se à vontade para contribuir com o projeto. Você pode fazer isso de vár
 	•	Enviando solicitações de funcionalidades
 	•	Criando pull requests
 
-Licença
+## Licença
 
 Este projeto está licenciado sob a MIT License. Veja o arquivo LICENSE para mais detalhes.
 
