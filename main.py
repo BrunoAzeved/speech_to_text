@@ -93,7 +93,7 @@ def transcribe_audio_with_whisper(base_path_to_saved_files, subtitles_path):
         start = 0
         id_counter = 0
         final_list_of_text = []
-        model = whisper.load_model("medium", device='cpu')
+        model = whisper.load_model("tiny", device='cpu') # tiny, base, small, medium, large 
         
         for index, file in enumerate(list_of_files):
             path_to_saved_file = os.path.join(base_path_to_saved_files, file)
@@ -204,6 +204,11 @@ def main():
         transcribe_audio_with_whisper(temp_audio_dir, temp_subtitle_path)
         textos_com_marcacoes = processar_arquivo_origem(temp_subtitle_path)
         escrever_arquivo_destino(textos_com_marcacoes, final_transcription_path)
+
+        # Remover arquivo de legendas temporário
+        if os.path.exists(temp_subtitle_path):
+            os.remove(temp_subtitle_path)
+            print(f"Arquivo temporário removido: {temp_subtitle_path}")
 
         # Limpar o diretório temp_audio
         for temp_file in os.listdir(temp_audio_dir):
