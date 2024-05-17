@@ -219,13 +219,13 @@ def main():
 
         # Limpar o diretório temp_audio
         temp_files = os.listdir(temp_audio_dir)
-        pbar = tqdm(total=len(temp_files), desc='Deletando arquivos temporários')
+        #pbar = tqdm(total=len(temp_files), desc='Deletando arquivos temporários')
         for temp_file in temp_files:
             temp_file_path = os.path.join(temp_audio_dir, temp_file)
             os.remove(temp_file_path)
-            pbar.update(1)  # Atualiza a barra de progresso
+            #pbar.update(1)  # Atualiza a barra de progresso
 
-    pbar.close()  # Fecha a barra de progresso após completar
+    #pbar.close()  # Fecha a barra de progresso após completar
 
 
 if __name__ == "__main__":
