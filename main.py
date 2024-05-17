@@ -4,6 +4,7 @@ from datetime import timedelta
 import whisper
 from moviepy.video.VideoClip import ImageClip
 from moviepy.editor import AudioFileClip
+from tqdm import tqdm
 
 # Função para converter segundos em hh:mm:ss
 def converter_segundos_para_tempo(segundos):
@@ -56,7 +57,9 @@ def split_audio_file(path, temp_audio_dir):
                 caminho_arquivo = os.path.join(temp_audio_dir, arquivo)
                 if os.path.isfile(caminho_arquivo):
                     os.remove(caminho_arquivo)
-                    print(f'Arquivo {arquivo} excluído.')
+
+        num_clips = int(duration / 60) + (1 if duration % 60 != 0 else 0)  # Calcula o número de clipes
+        pbar = tqdm(total=num_clips, desc='Criando arquivos temporários')
 
         while True:
             audio_clip = AudioFileClip(path)
@@ -65,14 +68,19 @@ def split_audio_file(path, temp_audio_dir):
                 index = duration
             temp = audio_clip.subclip(start, index)
             temp_saving_location = os.path.join(temp_audio_dir, f'temp_{counter}.mp3')
-            temp.write_audiofile(filename=temp_saving_location)
+            temp.write_audiofile(filename=temp_saving_location, logger=None)  # Desativa os logs do MoviePy
             temp.close()
             counter += 1
             start = index
             audio_clip.close()
+
+            pbar.update(1)  # Atualiza a barra de progresso
+
             if flag_to_exit:
                 break
             index += 60
+        
+        pbar.close()  # Fecha a barra de progresso após completar
         print('Arquivo dividido, iniciando processo de transcrição...')
     except Exception as e:
         print(f"Erro ao dividir o arquivo de áudio: {e}")
@@ -89,36 +97,35 @@ def transcribe_audio_with_whisper(base_path_to_saved_files, subtitles_path):
     """
     try:
         list_of_files = [files for files in os.listdir(base_path_to_saved_files) if files.endswith(".mp3")]
-
-        start = 0
-        id_counter = 0
         final_list_of_text = []
-        model = whisper.load_model("tiny", device='cpu') # tiny, base, small, medium, large 
-        
-        for index, file in enumerate(list_of_files):
+        model = whisper.load_model("tiny", device='cpu')
+
+        # Inicializa a barra de progresso
+        pbar = tqdm(total=len(list_of_files), desc='Progresso da Transcrição')
+
+        for file in list_of_files:
             path_to_saved_file = os.path.join(base_path_to_saved_files, file)
             audio_clip = AudioFileClip(path_to_saved_file)
             duration = audio_clip.duration
             audio_clip.close()
 
             out = model.transcribe(path_to_saved_file)
-            print(f'{index + 1} of {len(list_of_files)} - OK')
 
             list_of_text = out['segments']
+            start = 0
+            id_counter = 0
             for line in list_of_text:
                 line['start'] += start
                 line['end'] += start
                 line['id'] = id_counter
                 id_counter += 1
-
                 final_list_of_text.append(line)
-
             start += duration
 
-        for index, data in enumerate(final_list_of_text[:-1]):
-            fur_data = final_list_of_text[index + 1]
-            data['end'] = fur_data['start']
-            data['duration'] = data['end'] - data['start']
+            # Atualiza a barra de progresso após a transcrição de cada arquivo
+            pbar.update(1)
+        
+        pbar.close()  # Fecha a barra de progresso ao finalizar todas as transcrições
 
         save_subtitles(list_of_subtitles=final_list_of_text, path_to_save=subtitles_path)
         print('Fim das Transcrições')
@@ -211,9 +218,15 @@ def main():
             print(f"Arquivo temporário removido: {temp_subtitle_path}")
 
         # Limpar o diretório temp_audio
-        for temp_file in os.listdir(temp_audio_dir):
+        temp_files = os.listdir(temp_audio_dir)
+        pbar = tqdm(total=len(temp_files), desc='Deletando arquivos temporários')
+        for temp_file in temp_files:
             temp_file_path = os.path.join(temp_audio_dir, temp_file)
             os.remove(temp_file_path)
+            pbar.update(1)  # Atualiza a barra de progresso
+
+    pbar.close()  # Fecha a barra de progresso após completar
+
 
 if __name__ == "__main__":
     main()
