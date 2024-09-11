@@ -98,10 +98,12 @@ def transcribe_audio_with_whisper(base_path_to_saved_files, subtitles_path):
     try:
         list_of_files = [files for files in os.listdir(base_path_to_saved_files) if files.endswith(".mp3")]
         final_list_of_text = []
-        model = whisper.load_model("tiny", device='cpu')
+        model = whisper.load_model("small", device='cpu')
 
         # Inicializa a barra de progresso
         pbar = tqdm(total=len(list_of_files), desc='Progresso da Transcrição')
+
+        start = 0  # Inicializa o tempo de início fora do loop
 
         for file in list_of_files:
             path_to_saved_file = os.path.join(base_path_to_saved_files, file)
@@ -112,15 +114,16 @@ def transcribe_audio_with_whisper(base_path_to_saved_files, subtitles_path):
             out = model.transcribe(path_to_saved_file)
 
             list_of_text = out['segments']
-            start = 0
             id_counter = 0
             for line in list_of_text:
+                # Ajusta o tempo de cada segmento adicionando o valor de 'start'
                 line['start'] += start
                 line['end'] += start
                 line['id'] = id_counter
                 id_counter += 1
                 final_list_of_text.append(line)
-            start += duration
+            
+            start += duration  # Incrementa o tempo de início para o próximo arquivo
 
             # Atualiza a barra de progresso após a transcrição de cada arquivo
             pbar.update(1)
