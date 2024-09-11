@@ -2,3 +2,6 @@
 /.venv
 /audio.wav
 /transcricao.txt
+/temp_audio
+/input
+/output
